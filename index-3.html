@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Flourish Microschool — Old Town Scottsdale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --forest:#1A3A2A; --green:#2D6A4F; --sage:#52A86E;
+    --orange:#D4631A; --amber:#F0884A; --gold:#F2A150;
+    --cream:#FAF8F2; --mint:#C8E6C9; --white:#FFFFFF;
+    --charcoal:#2B2B2B; --gray:#666; --ltgray:#F0EFEA;
+    --red:#C0392B;
+    --font-head:'Playfair Display',Georgia,serif;
+    --font-body:'Lato',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);overflow-x:hidden;}
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    background:rgba(26,58,42,0.97);backdrop-filter:blur(8px);
+    border-bottom:3px solid var(--orange);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 5%;height:64px;
+  }
+  .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .nav-logo{width:36px;height:36px;}
+  .nav-name{font-family:var(--font-head);font-size:1.25rem;font-weight:700;color:var(--white);letter-spacing:0.02em;}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--mint);text-decoration:none;font-size:0.88rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;transition:color .2s;}
+  .nav-links a:hover{color:var(--gold);}
+  .nav-cta{background:var(--orange);color:var(--white)!important;padding:0.4rem 1.1rem;border-radius:4px;transition:background .2s!important;}
+  .nav-cta:hover{background:var(--amber)!important;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:all .3s;}
+  @media(max-width:768px){
+    .nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--forest);padding:1.5rem 5%;border-bottom:3px solid var(--orange);}
+    .nav-links.open{display:flex;}
+    .hamburger{display:flex;}
+  }
+
+  /* ── HERO ── */
+  #hero{
+    min-height:100vh;background:var(--forest);
+    display:flex;align-items:center;
+    position:relative;overflow:hidden;padding:0 6%;
+    padding-top:64px;
+  }
+  .hero-blob{position:absolute;border-radius:50%;opacity:.18;}
+  .hero-blob-1{width:600px;height:600px;background:var(--sage);top:-150px;right:-100px;}
+  .hero-blob-2{width:300px;height:300px;background:var(--orange);bottom:-80px;right:15%;}
+  .hero-blob-3{width:180px;height:180px;background:var(--green);bottom:80px;left:5%;}
+  .hero-inner{position:relative;z-index:2;max-width:700px;}
+  .hero-badge{
+    display:inline-block;background:var(--orange);color:var(--white);
+    font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+    padding:0.38rem 1rem;border-radius:3px;margin-bottom:1.5rem;
+  }
+  .hero-title{
+    font-family:var(--font-head);font-size:clamp(3rem,6vw,5.5rem);
+    font-weight:700;line-height:1.05;color:var(--white);margin-bottom:0.4rem;
+    opacity:0;animation:fadeUp .8s .1s ease forwards;
+  }
+  .hero-title em{color:var(--gold);font-style:italic;}
+  .hero-sub{
+    font-family:var(--font-head);font-size:clamp(1.1rem,2.5vw,1.6rem);
+    font-weight:400;font-style:italic;color:var(--mint);
+    margin-bottom:0.9rem;
+    opacity:0;animation:fadeUp .8s .25s ease forwards;
+  }
+  .hero-tagline{
+    font-size:1rem;color:var(--mint);opacity:0;
+    line-height:1.65;margin-bottom:2rem;max-width:520px;
+    animation:fadeUp .8s .4s ease forwards;
+  }
+  .hero-pills{
+    display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.2rem;
+    opacity:0;animation:fadeUp .8s .5s ease forwards;
+  }
+  .pill{
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);
+    color:var(--mint);font-size:0.8rem;font-weight:700;
+    padding:.32rem .9rem;border-radius:50px;
+  }
+  .hero-btns{
+    display:flex;gap:1rem;flex-wrap:wrap;
+    opacity:0;animation:fadeUp .8s .6s ease forwards;
+  }
+  .btn-primary{
+    background:var(--orange);color:var(--white);
+    padding:.85rem 2rem;border-radius:5px;font-size:1rem;font-weight:700;
+    text-decoration:none;display:inline-block;
+    transition:background .2s,transform .15s;letter-spacing:.03em;
+  }
+  .btn-primary:hover{background:var(--amber);transform:translateY(-2px);}
+  .btn-outline{
+    background:transparent;color:var(--white);
+    border:2px solid rgba(255,255,255,.45);
+    padding:.85rem 2rem;border-radius:5px;font-size:1rem;font-weight:700;
+    text-decoration:none;display:inline-block;
+    transition:border-color .2s,transform .15s;
+  }
+  .btn-outline:hover{border-color:var(--white);transform:translateY(-2px);}
+  .hero-scroll{
+    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    color:var(--sage);font-size:0.78rem;letter-spacing:.1em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    animation:bounce 2s infinite;
+  }
+  .hero-scroll::after{content:'';width:1px;height:36px;background:var(--sage);}
+  @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-6px);}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+
+  /* ── SECTION COMMON ── */
+  section{padding:90px 6%;}
+  .section-label{
+    display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--orange);margin-bottom:.75rem;
+  }
+  .section-title{
+    font-family:var(--font-head);font-size:clamp(1.9rem,3.5vw,2.8rem);
+    font-weight:700;color:var(--forest);line-height:1.15;margin-bottom:1.2rem;
+  }
+  .section-title em{color:var(--orange);font-style:italic;}
+  .section-sub{
+    font-size:1.05rem;color:var(--gray);line-height:1.7;
+    max-width:650px;margin-bottom:2.5rem;
+  }
+  .section-dark .section-title{color:var(--white);}
+  .section-dark .section-sub{color:var(--mint);}
+
+  /* ── STAT STRIP ── */
+  #problem{background:var(--white);padding:80px 6%;}
+  .stat-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:center;max-width:900px;margin:2.5rem auto 0;}
+  .stat-card{
+    border-radius:12px;padding:2.5rem 1.5rem 2rem;text-align:center;
+    box-shadow:0 8px 32px rgba(0,0,0,.12);
+  }
+  .stat-card.home{background:var(--green);}
+  .stat-card.school{background:var(--red);}
+  .stat-number{font-family:var(--font-head);font-size:clamp(4rem,10vw,7rem);font-weight:700;color:var(--white);line-height:1;}
+  .stat-label{font-size:.95rem;color:rgba(255,255,255,.8);margin:.4rem 0;}
+  .stat-context{font-size:.82rem;color:rgba(255,255,255,.65);font-style:italic;margin-top:.6rem;}
+  .stat-where{font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:var(--gold);margin-top:.5rem;}
+  .vs-badge{
+    width:56px;height:56px;background:var(--orange);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--white);
+    box-shadow:0 4px 16px rgba(212,99,26,.4);
+  }
+  .problem-cta{
+    text-align:center;margin-top:2.5rem;
+    font-family:var(--font-head);font-size:1.25rem;font-style:italic;color:var(--forest);
+  }
+  .problem-cta span{color:var(--orange);font-weight:700;}
+
+  /* ── ABOUT (2-col) ── */
+  #about{background:var(--cream);}
+  .about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:start;}
+  .about-list{list-style:none;margin-top:1.5rem;}
+  .about-list li{
+    display:flex;gap:1rem;align-items:flex-start;
+    padding:.9rem 0;border-bottom:1px solid rgba(0,0,0,.07);
+    font-size:.97rem;color:var(--charcoal);line-height:1.6;
+  }
+  .about-list li:last-child{border:none;}
+  .about-dot{
+    width:28px;height:28px;min-width:28px;border-radius:50%;
+    background:var(--orange);display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+  }
+  .about-dot svg{width:14px;height:14px;fill:var(--white);}
+  .amanda-card{
+    background:var(--forest);border-radius:16px;padding:2.5rem;
+    position:sticky;top:80px;
+  }
+  .amanda-avatar{
+    width:70px;height:70px;border-radius:50%;
+    background:var(--orange);display:flex;align-items:center;justify-content:center;
+    margin:0 auto 1.2rem;font-family:var(--font-head);font-size:1.6rem;color:var(--white);font-weight:700;
+  }
+  .amanda-card h3{font-family:var(--font-head);font-size:1.4rem;color:var(--white);text-align:center;margin-bottom:.3rem;}
+  .amanda-title{text-align:center;font-size:.85rem;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.2rem;}
+  .amanda-divider{height:2px;background:var(--orange);border-radius:2px;margin:1rem 0;}
+  .amanda-facts{list-style:none;}
+  .amanda-facts li{
+    display:flex;gap:.75rem;align-items:flex-start;
+    color:var(--mint);font-size:.93rem;padding:.5rem 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .amanda-facts li:last-child{border:none;}
+  .amanda-facts li::before{content:'✦';color:var(--orange);flex-shrink:0;margin-top:2px;}
+  .amanda-contact{
+    margin-top:1.5rem;background:rgba(255,255,255,.06);border-radius:8px;
+    padding:1rem;text-align:center;
+  }
+  .amanda-contact a{color:var(--gold);text-decoration:none;font-size:.88rem;word-break:break-all;}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;}.amanda-card{position:static;}}
+
+  /* ── PHILOSOPHY (dark) ── */
+  #philosophy{background:var(--forest);padding:90px 6%;}
+  .philosophy-quote{
+    background:var(--green);border-left:5px solid var(--orange);
+    border-radius:0 12px 12px 0;padding:1.8rem 2rem;
+    max-width:800px;margin:0 auto 3rem;
+  }
+  .philosophy-quote p{font-family:var(--font-head);font-size:1.2rem;font-style:italic;color:var(--white);line-height:1.65;}
+  .beliefs-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:900px;margin:0 auto;}
+  .belief-item{
+    display:flex;gap:1rem;align-items:flex-start;
+    background:rgba(255,255,255,.05);border-radius:10px;
+    padding:1.2rem 1.4rem;border:1px solid rgba(255,255,255,.08);
+    transition:background .2s;
+  }
+  .belief-item:hover{background:rgba(255,255,255,.09);}
+  .belief-icon{
+    width:40px;height:40px;min-width:40px;border-radius:50%;
+    background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  }
+  .belief-item p{color:var(--mint);font-size:.95rem;line-height:1.6;}
+  .philosophy-cta{text-align:center;margin-top:2.5rem;font-family:var(--font-head);font-style:italic;color:var(--gold);font-size:1.1rem;}
+  @media(max-width:600px){.beliefs-grid{grid-template-columns:1fr;}}
+
+  /* ── FOUNDATIONS (cards) ── */
+  #foundations{background:var(--cream);}
+  .found-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:960px;margin:0 auto;}
+  .found-card{
+    background:var(--white);border-radius:14px;
+    border-top:5px solid var(--orange);
+    padding:2rem 1.8rem;
+    box-shadow:0 4px 20px rgba(0,0,0,.06);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .found-card:nth-child(2){border-color:var(--green);}
+  .found-card:nth-child(3){border-color:#2980B9;}
+  .found-card:nth-child(4){border-color:#7D3C98;}
+  .found-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1);}
+  .found-num{font-size:.75rem;font-weight:700;letter-spacing:.1em;color:var(--orange);text-transform:uppercase;margin-bottom:.4rem;}
+  .found-card:nth-child(2) .found-num{color:var(--green);}
+  .found-card:nth-child(3) .found-num{color:#2980B9;}
+  .found-card:nth-child(4) .found-num{color:#7D3C98;}
+  .found-card h3{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--forest);margin-bottom:.8rem;}
+  .found-card p{color:var(--gray);font-size:.95rem;line-height:1.7;}
+  @media(max-width:660px){.found-grid{grid-template-columns:1fr;}}
+
+  /* ── SCHEDULE ── */
+  #schedule{background:var(--white);}
+  .schedule-list{max-width:800px;margin:0 auto;}
+  .sched-item{
+    display:grid;grid-template-columns:130px 1fr;
+    gap:0;margin-bottom:3px;border-radius:0;overflow:hidden;
+  }
+  .sched-item:first-child{border-radius:10px 10px 0 0;}
+  .sched-item:last-child{border-radius:0 0 10px 10px;}
+  .sched-time{
+    background:var(--forest);padding:1rem 1.2rem;
+    font-size:.88rem;font-weight:700;color:var(--white);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    letter-spacing:.02em;
+  }
+  .sched-item:nth-child(2n) .sched-time{background:var(--green);}
+  .sched-item:nth-child(3) .sched-time{background:var(--sage);}
+  .sched-item:nth-child(4) .sched-time{background:var(--orange);}
+  .sched-item:nth-child(5) .sched-time{background:#B07A28;}
+  .sched-item:nth-child(6) .sched-time{background:var(--forest);}
+  .sched-body{
+    background:var(--ltgray);padding:.9rem 1.4rem;
+    border-bottom:1px solid rgba(0,0,0,.04);
+  }
+  .sched-item:nth-child(2n) .sched-body{background:var(--white);}
+  .sched-name{font-weight:700;font-size:1rem;color:var(--forest);margin-bottom:.2rem;}
+  .sched-desc{font-size:.9rem;color:var(--gray);line-height:1.55;}
+  @media(max-width:540px){
+    .sched-item{grid-template-columns:1fr;}
+    .sched-time{justify-content:flex-start;padding:.6rem 1rem;}
+  }
+
+  /* ── PURSUITS ── */
+  #pursuits{background:var(--cream);}
+  .pursuits-intro{
+    background:var(--green);border-radius:12px;padding:1.5rem 2rem;
+    margin-bottom:2.5rem;max-width:860px;
+  }
+  .pursuits-intro p{font-family:var(--font-head);font-style:italic;color:var(--white);font-size:1.05rem;line-height:1.65;}
+  .pursuits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:960px;}
+  .pursuit-card{
+    background:var(--white);border-radius:14px;overflow:hidden;
+    box-shadow:0 4px 20px rgba(0,0,0,.07);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .pursuit-card:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.12);}
+  .pursuit-header{
+    background:var(--orange);padding:1.2rem 1.4rem;
+    display:flex;gap:.75rem;align-items:center;
+  }
+  .pursuit-card:nth-child(2) .pursuit-header{background:var(--green);}
+  .pursuit-card:nth-child(3) .pursuit-header{background:#2980B9;}
+  .pursuit-emoji{font-size:1.5rem;}
+  .pursuit-header h3{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--white);}
+  .pursuit-body{padding:1.4rem;}
+  .pursuit-label{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:.4rem;}
+  .pursuit-card:nth-child(2) .pursuit-label{color:var(--green);}
+  .pursuit-card:nth-child(3) .pursuit-label{color:#2980B9;}
+  .pursuit-body p{font-size:.9rem;color:var(--gray);line-height:1.6;margin-bottom:.9rem;}
+  .pursuit-note{
+    font-style:italic;font-size:.85rem;color:var(--green);
+    background:rgba(45,106,79,.07);border-radius:6px;
+    padding:.6rem .8rem;line-height:1.5;
+  }
+  .pursuit-card:nth-child(2) .pursuit-note{color:var(--green);}
+  .pursuit-card:nth-child(3) .pursuit-note{color:#2980B9;background:rgba(41,128,185,.07);}
+  @media(max-width:768px){.pursuits-grid{grid-template-columns:1fr;}}
+
+  /* ── SUPERPOWERS ── */
+  #superpowers{background:var(--forest);}
+  .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:960px;margin:2rem auto 0;}
+  .sp-card{
+    background:rgba(255,255,255,.06);border:2px solid var(--orange);
+    border-radius:12px;overflow:hidden;
+  }
+  .sp-card:nth-child(2){border-color:var(--sage);}
+  .sp-card:nth-child(3){border-color:#2980B9;}
+  .sp-card:nth-child(4){border-color:var(--gold);}
+  .sp-header{
+    background:var(--orange);padding:.7rem 1rem;
+    font-family:var(--font-head);font-size:.95rem;font-weight:700;color:var(--white);
+  }
+  .sp-card:nth-child(2) .sp-header{background:var(--sage);}
+  .sp-card:nth-child(3) .sp-header{background:#2980B9;}
+  .sp-card:nth-child(4) .sp-header{background:#B07A28;}
+  .sp-list{padding:.8rem 1rem;list-style:none;}
+  .sp-list li{
+    color:var(--mint);font-size:.87rem;padding:.32rem 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .sp-list li:last-child{border:none;}
+  .sp-list li::before{content:'→ ';color:var(--orange);}
+  .sp-card:nth-child(2) .sp-list li::before{color:var(--sage);}
+  .sp-card:nth-child(3) .sp-list li::before{color:#64B5F6;}
+  .sp-card:nth-child(4) .sp-list li::before{color:var(--gold);}
+  .sp-stat{
+    text-align:center;margin-top:2.5rem;
+    background:var(--orange);border-radius:12px;padding:1.2rem 2rem;
+    max-width:600px;margin:2.5rem auto 0;
+    color:var(--white);font-style:italic;font-size:.95rem;
+  }
+  @media(max-width:700px){.sp-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:400px){.sp-grid{grid-template-columns:1fr;}}
+
+  /* ── COMPARE ── */
+  #compare{background:var(--white);}
+  .compare-table{width:100%;max-width:900px;border-collapse:collapse;margin:2rem auto 0;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07);}
+  .compare-table th{padding:.9rem 1.2rem;font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+  .compare-table th:first-child{background:var(--ltgray);color:var(--forest);text-align:left;}
+  .compare-table th:nth-child(2){background:var(--red);color:var(--white);}
+  .compare-table th:nth-child(3){background:var(--orange);color:var(--white);}
+  .compare-table td{padding:.85rem 1.2rem;font-size:.93rem;border-bottom:1px solid rgba(0,0,0,.06);}
+  .compare-table tr:last-child td{border:none;}
+  .compare-table td:first-child{font-weight:700;color:var(--forest);background:var(--ltgray);}
+  .compare-table td:nth-child(2){color:var(--gray);background:var(--white);}
+  .compare-table td:nth-child(3){color:var(--charcoal);background:#FFF8F3;font-weight:600;}
+  .compare-table tr:nth-child(even) td:nth-child(2){background:var(--ltgray);}
+  .compare-table tr:nth-child(even) td:nth-child(3){background:#FFF2E8;}
+  .x{color:var(--red);}
+  .chk{color:var(--orange);}
+  @media(max-width:600px){
+    .compare-table{font-size:.8rem;}
+    .compare-table th,.compare-table td{padding:.6rem .75rem;}
+  }
+
+  /* ── TUITION ── */
+  #tuition{background:var(--cream);}
+  .tuition-hero{
+    background:var(--orange);border-radius:14px;
+    padding:2.2rem 2.5rem;text-align:center;margin-bottom:2.5rem;
+    max-width:820px;
+  }
+  .tuition-hero h3{font-family:var(--font-head);font-size:1.6rem;color:var(--white);margin-bottom:.6rem;}
+  .tuition-hero p{color:rgba(255,255,255,.88);font-size:1rem;font-style:italic;}
+  .tuition-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:960px;}
+  .tuition-card{background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+  .tuition-header{background:var(--forest);padding:1.1rem 1.4rem;display:flex;gap:.75rem;align-items:center;}
+  .tuition-card:nth-child(2) .tuition-header{background:var(--green);}
+  .tuition-card:nth-child(3) .tuition-header{background:var(--orange);}
+  .tuition-icon{font-size:1.3rem;}
+  .tuition-header h3{font-family:var(--font-head);font-size:1rem;color:var(--white);}
+  .tuition-body{padding:1.4rem;font-size:.93rem;color:var(--gray);line-height:1.7;}
+  .tuition-note{
+    text-align:center;margin-top:2rem;font-family:var(--font-head);
+    font-style:italic;color:var(--forest);font-size:1rem;
+  }
+  @media(max-width:700px){.tuition-grid{grid-template-columns:1fr;}}
+
+  /* ── FOUNDING ── */
+  #founding{background:var(--forest);}
+  .founding-inner{max-width:820px;margin:0 auto;text-align:center;}
+  .founding-number{
+    font-family:var(--font-head);font-size:clamp(4rem,10vw,7rem);
+    font-weight:700;color:var(--white);
+    background:var(--orange);border-radius:16px;
+    display:inline-block;padding:.2em .8em;margin:1.5rem 0;line-height:1.1;
+  }
+  .founding-label{font-size:1rem;color:var(--gold);font-style:italic;margin-bottom:2.5rem;}
+  .founding-benefits{
+    display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left;margin-top:1.5rem;
+  }
+  .benefit-item{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+    border-radius:10px;padding:1.1rem 1.3rem;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .benefit-icon{font-size:1.3rem;flex-shrink:0;}
+  .benefit-item p{color:var(--mint);font-size:.93rem;line-height:1.6;}
+  @media(max-width:600px){.founding-benefits{grid-template-columns:1fr;}}
+
+  /* ── SIGNUP FORM ── */
+  #signup{background:var(--white);}
+  .signup-inner{max-width:680px;margin:0 auto;}
+  .form-intro{
+    background:var(--forest);border-radius:14px;padding:1.8rem 2rem;
+    margin-bottom:2.5rem;display:flex;gap:1.2rem;align-items:flex-start;
+  }
+  .form-intro-icon{font-size:2rem;flex-shrink:0;}
+  .form-intro h3{font-family:var(--font-head);font-size:1.25rem;color:var(--white);margin-bottom:.4rem;}
+  .form-intro p{color:var(--mint);font-size:.92rem;line-height:1.6;}
+  .form-group{margin-bottom:1.4rem;}
+  .form-group label{
+    display:block;font-size:.85rem;font-weight:700;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--forest);margin-bottom:.5rem;
+  }
+  .form-group input,.form-group select,.form-group textarea{
+    width:100%;padding:.85rem 1rem;
+    border:2px solid #DDD;border-radius:7px;
+    font-family:var(--font-body);font-size:1rem;color:var(--charcoal);
+    background:var(--white);transition:border-color .2s;
+    outline:none;
+  }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--orange);}
+  .form-group textarea{resize:vertical;min-height:110px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+  .form-check{display:flex;gap:.75rem;align-items:center;margin-top:.5rem;}
+  .form-check input{width:auto;}
+  .form-check label{font-size:.9rem;color:var(--gray);font-weight:400;letter-spacing:0;text-transform:none;}
+  .submit-btn{
+    width:100%;background:var(--orange);color:var(--white);
+    border:none;border-radius:7px;padding:1.05rem;
+    font-family:var(--font-body);font-size:1.05rem;font-weight:700;
+    cursor:pointer;letter-spacing:.04em;
+    transition:background .2s,transform .15s;
+  }
+  .submit-btn:hover{background:var(--amber);transform:translateY(-2px);}
+  .form-privacy{text-align:center;font-size:.8rem;color:#AAA;margin-top:1rem;}
+  .form-success{
+    display:none;text-align:center;padding:3rem 2rem;
+    background:var(--ltgray);border-radius:14px;
+  }
+  .form-success .check{font-size:3rem;margin-bottom:1rem;}
+  .form-success h3{font-family:var(--font-head);font-size:1.5rem;color:var(--forest);margin-bottom:.75rem;}
+  .form-success p{color:var(--gray);font-size:.95rem;line-height:1.7;}
+  @media(max-width:540px){.form-row{grid-template-columns:1fr;}}
+
+  /* ── FOOTER ── */
+  footer{background:var(--forest);padding:3.5rem 6% 2rem;border-top:4px solid var(--orange);}
+  .footer-inner{
+    display:grid;grid-template-columns:1.5fr 1fr 1fr;
+    gap:3rem;max-width:960px;margin:0 auto 2.5rem;
+  }
+  .footer-brand h3{font-family:var(--font-head);font-size:1.5rem;color:var(--white);margin-bottom:.5rem;}
+  .footer-brand p{color:var(--mint);font-size:.88rem;line-height:1.65;margin-bottom:1rem;}
+  .footer-tagline{color:var(--gold);font-style:italic;font-size:.9rem;}
+  .footer-col h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:.6rem;}
+  .footer-col ul li a{color:var(--mint);text-decoration:none;font-size:.9rem;transition:color .2s;}
+  .footer-col ul li a:hover{color:var(--white);}
+  .footer-bottom{
+    text-align:center;padding-top:1.5rem;
+    border-top:1px solid rgba(255,255,255,.1);
+    color:rgba(255,255,255,.4);font-size:.8rem;
+  }
+  @media(max-width:700px){.footer-inner{grid-template-columns:1fr;gap:2rem;}}
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+  .reveal.visible{opacity:1;transform:none;}
+
+  /* ── BACK TO TOP ── */
+  #btt{
+    position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
+    width:44px;height:44px;border-radius:50%;
+    background:var(--orange);color:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;cursor:pointer;border:none;
+    box-shadow:0 4px 16px rgba(212,99,26,.5);
+    opacity:0;transition:opacity .3s,transform .2s;
+    pointer-events:none;
+  }
+  #btt.show{opacity:1;pointer-events:auto;}
+  #btt:hover{transform:scale(1.1);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="24" fill="#2D6A4F"/>
+      <path d="M24 38 C24 38 14 28 14 20 C14 14.5 18.5 10 24 10 C29.5 10 34 14.5 34 20 C34 28 24 38 24 38Z" fill="#D4631A" opacity=".9"/>
+      <path d="M24 38 C24 38 24 22 24 14" stroke="#FAF8F2" stroke-width="1.5" opacity=".6"/>
+      <path d="M20 18 C20 18 24 16 28 20" stroke="#FAF8F2" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+    </svg>
+    <span class="nav-name">Flourish Scottsdale</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#pursuits">Pursuits</a></li>
+    <li><a href="#tuition">Tuition</a></li>
+    <li><a href="#signup" class="nav-cta">Join Us →</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Now Enrolling — Fall 2026</div>
+    <h1 class="hero-title">Where Learning<br>is a <em>Joy.</em></h1>
+    <p class="hero-sub">And every child is known, challenged, and seen.</p>
+    <p class="hero-tagline">A private microschool for grades 5–8 opening in Old Town Scottsdale. Small classes, real projects, AI-powered personalized learning — and teachers who truly know your child.</p>
+    <div class="hero-pills">
+      <span class="pill">Grades 5–8</span>
+      <span class="pill">Max 25 per teacher</span>
+      <span class="pill">Old Town Scottsdale</span>
+      <span class="pill">ESA Eligible</span>
+      <span class="pill">MSA Accredited</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#signup" class="btn-primary">Reserve Your Spot →</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- THE PROBLEM -->
+<section id="problem">
+  <div style="text-align:center;max-width:700px;margin:0 auto;">
+    <span class="section-label">Why Flourish Exists</span>
+    <h2 class="section-title" style="margin:0 auto .8rem;">Something Is Broken With<br>Traditional School</h2>
+    <p class="section-sub" style="margin:0 auto 0;">Research shows what most parents already feel.</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card home reveal">
+      <div class="stat-number">50</div>
+      <div class="stat-label">questions per hour</div>
+      <div class="stat-where">AT HOME</div>
+      <div class="stat-context">Curious, engaged,<br>bursting with questions.</div>
+    </div>
+    <div class="vs-badge">vs</div>
+    <div class="stat-card school reveal">
+      <div class="stat-number">2</div>
+      <div class="stat-label">questions per hour</div>
+      <div class="stat-where">AT SCHOOL</div>
+      <div class="stat-context">Traditional school slowly<br>trains curiosity out of them.</div>
+    </div>
+  </div>
+  <div class="problem-cta reveal">
+    <span>We built Flourish to change that</span> — right here in Old Town Scottsdale.
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <span class="section-label">About Flourish</span>
+      <h2 class="section-title">A New Kind of<br>Middle School</h2>
+      <p class="section-sub">Flourish is an AI-native private microschool network founded by John Danner (co-founder of Rocketship Public Schools) and Adam Nadeau. Now coming to Old Town Scottsdale for the first time.</p>
+      <ul class="about-list reveal">
+        <li>
+          <div class="about-dot"><svg viewBox="0 0 16 16"><path d="M13 4L6.5 11 3 7.5"/><path d="M13 4L6.5 11 3 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          Founded by John Danner — co-founder of Rocketship Public Schools — and Adam Nadeau
+        </li>
+        <li>
+          <div class="about-dot"><svg viewBox="0 0 16 16"><path d="M13 4L6.5 11 3 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          MSA accredited and state-approved as a private independent school
+        </li>
+        <li>
+          <div class="about-dot"><svg viewBox="0 0 16 16"><path d="M13 4L6.5 11 3 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          AI-native from the ground up — built for the world your child will graduate into
+        </li>
+        <li>
+          <div class="about-dot"><svg viewBox="0 0 16 16"><path d="M13 4L6.5 11 3 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          Intentionally small: max 25 students per teacher, starting cohort of ~25 students
+        </li>
+        <li>
+          <div class="about-dot"><svg viewBox="0 0 16 16"><path d="M13 4L6.5 11 3 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          Accessible through Arizona ESA funding — may cover most or all of tuition
+        </li>
+        <li>
+          <div class="about-dot"><svg viewBox="0 0 16 16"><path d="M13 4L6.5 11 3 7.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          Already proven in Nashville, TN — now Scottsdale families get their turn
+        </li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="amanda-card">
+        <div class="amanda-avatar">AM</div>
+        <h3>Amanda Mesquita</h3>
+        <div class="amanda-title">Flourish Fellow &amp; Your Educator</div>
+        <div class="amanda-divider"></div>
+        <ul class="amanda-facts">
+          <li>8-year Old Town Scottsdale resident</li>
+          <li>Credentialed educator — classroom experience</li>
+          <li>Master's Degree in Education</li>
+          <li>Flourish Fellow — Arizona's first campus</li>
+          <li>Deeply passionate about keeping kids curious</li>
+          <li>Will personally walk you through ESA funding</li>
+        </ul>
+        <div class="amanda-contact">
+          <a href="/cdn-cgi/l/email-protection#543539353a303539312725213d20351432383b21263d273c27373c3b3b38277a373b39"><span class="__cf_email__" data-cfemail="f3929e929d97929e968082869a8792b3959f9c86819a809b80909b9c9c9f80dd909c9e">[email&#160;protected]</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="section-dark">
+  <div style="max-width:900px;margin:0 auto;">
+    <span class="section-label" style="color:var(--gold);">Our Philosophy</span>
+    <h2 class="section-title" style="color:var(--white);">We Don't Chase Compliance.<br>We <em style="color:var(--gold);">Build Community.</em></h2>
+    <div class="philosophy-quote reveal">
+      <p>"When students are genuinely curious, deeply known by their teachers, and given real problems to solve — academic growth follows naturally."</p>
+    </div>
+    <div class="beliefs-grid reveal">
+      <div class="belief-item">
+        <div class="belief-icon">🧒</div>
+        <p>Every student deserves a teacher who knows their name, their strengths, and their story.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-icon">🎯</div>
+        <p>Learning is not a race. Mastery matters far more than speed.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-icon">🔨</div>
+        <p>Project-based learning builds the skills that worksheets could never teach.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-icon">🛡️</div>
+        <p>Identity-affirming education is not optional — it is the foundation of everything we do.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-icon">🤝</div>
+        <p>A school that families truly trust is a school where children thrive.</p>
+      </div>
+      <div class="belief-item">
+        <div class="belief-icon">💡</div>
+        <p>Every child was born curious. It is school's job to keep them that way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUR FOUNDATIONS -->
+<section id="foundations">
+  <span class="section-label">What We're Built On</span>
+  <h2 class="section-title">The Four Foundations of<br>Every Flourish School</h2>
+  <div class="found-grid reveal">
+    <div class="found-card">
+      <div class="found-num">01 — Character</div>
+      <h3>Character</h3>
+      <p>We grow the whole child. Curiosity, resilience, empathy, and self-awareness are not soft skills — they are the skills that determine whether a person truly flourishes in school and in life. We create space for students to deeply know themselves.</p>
+    </div>
+    <div class="found-card">
+      <div class="found-num" style="color:var(--green);">02 — Mastery</div>
+      <h3>Mastery</h3>
+      <p>Every student moves at their own pace, demonstrating genuine understanding before moving forward. Getting it right matters more than getting it done. Every student can reach mastery at the right time with the right support.</p>
+    </div>
+    <div class="found-card">
+      <div class="found-num" style="color:#2980B9;">03 — Community</div>
+      <h3>Community</h3>
+      <p>School is not just a building you go to — it is a community you belong to. Every teacher knows every student. Every student knows each other. Families are actively included partners. The closeness is intentional and irreplaceable.</p>
+    </div>
+    <div class="found-card">
+      <div class="found-num" style="color:#7D3C98;">04 — Foundations</div>
+      <h3>Foundations</h3>
+      <p>Strong academic foundations in literacy, numeracy, and critical thinking open every future door. We take these seriously — not through drill and repetition, but through meaningful practice embedded in real projects and real questions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule">
+  <span class="section-label">Daily Life at Flourish</span>
+  <h2 class="section-title">A Day in the Life</h2>
+  <p class="section-sub">Every day is carefully designed for students to discover, question, and build with purpose.</p>
+  <div class="schedule-list reveal">
+    <div class="sched-item">
+      <div class="sched-time">8:00 AM</div>
+      <div class="sched-body">
+        <div class="sched-name">Morning Circle</div>
+        <div class="sched-desc">Community building, biography studies of impactful people, personal &amp; interpersonal skills. Students start every day connected and genuinely seen.</div>
+      </div>
+    </div>
+    <div class="sched-item">
+      <div class="sched-time">9:00 AM</div>
+      <div class="sched-body">
+        <div class="sched-name">Problem of the Day</div>
+        <div class="sched-desc">A rigorous daily challenge pulled from the Flourish arc of learning. Students work up through a series of problems. Teachers pull small groups in real time when a gap is spotted.</div>
+      </div>
+    </div>
+    <div class="sched-item">
+      <div class="sched-time">10:00 AM</div>
+      <div class="sched-body">
+        <div class="sched-name">Foundations</div>
+        <div class="sched-desc">AI-powered personalized lessons in reading, math, science and social studies. Mastery-based — every student on their own individual arc, never stuck or bored.</div>
+      </div>
+    </div>
+    <div class="sched-item">
+      <div class="sched-time">11:00 AM</div>
+      <div class="sched-body">
+        <div class="sched-name">Clubs &amp; Lunch</div>
+        <div class="sched-desc">Student-led clubs — golf, cooking, Roblox, sculpture, gardening and more. Students don't just join clubs, they plan and run them with teacher support.</div>
+      </div>
+    </div>
+    <div class="sched-item">
+      <div class="sched-time">12:00 PM</div>
+      <div class="sched-body">
+        <div class="sched-name">Novel Study</div>
+        <div class="sched-desc">The class reads whole novels together. Diverse genres, protagonists and settings. Deep analysis, joyful discussion, and a genuine love of reading — every single day.</div>
+      </div>
+    </div>
+    <div class="sched-item">
+      <div class="sched-time">12:45 PM</div>
+      <div class="sched-body">
+        <div class="sched-name">Pursuits</div>
+        <div class="sched-desc">Protected afternoon time for passion-based deep investigations. Students design their own studies into topics they genuinely care about. This is the heart of Flourish.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PURSUITS -->
+<section id="pursuits">
+  <span class="section-label">Project-Based Learning</span>
+  <h2 class="section-title">Pursuits — Learning That<br><em>Actually Sticks</em></h2>
+  <div class="pursuits-intro reveal">
+    <p>Extended, interdisciplinary projects where students tackle real questions that span math, writing, science, history and the arts — all at once. Learning that sticks because it means something real to the student.</p>
+  </div>
+  <div class="pursuits-grid reveal">
+    <div class="pursuit-card">
+      <div class="pursuit-header">
+        <div class="pursuit-emoji">🏞️</div>
+        <h3>Design a Neighborhood Park</h3>
+      </div>
+      <div class="pursuit-body">
+        <div class="pursuit-label">Skills Practiced</div>
+        <p>Math, geometry, budgeting, persuasive writing, and community advocacy — all woven into one real Pursuit.</p>
+        <div class="pursuit-note">Students present their designs to real Old Town Scottsdale community members and defend their choices with evidence.</div>
+      </div>
+    </div>
+    <div class="pursuit-card">
+      <div class="pursuit-header">
+        <div class="pursuit-emoji">📜</div>
+        <h3>Investigate Local History</h3>
+      </div>
+      <div class="pursuit-body">
+        <div class="pursuit-label">Skills Practiced</div>
+        <p>Primary source research, storytelling, data analysis, and oral presentation skills all come together naturally.</p>
+        <div class="pursuit-note" style="color:var(--green);background:rgba(45,106,79,.07);">Old Town Scottsdale has incredible history. Students discover their own neighborhood in a completely new way.</div>
+      </div>
+    </div>
+    <div class="pursuit-card">
+      <div class="pursuit-header">
+        <div class="pursuit-emoji">🏪</div>
+        <h3>Run a Student-Led Business</h3>
+      </div>
+      <div class="pursuit-body">
+        <div class="pursuit-label">Skills Practiced</div>
+        <p>Economics, writing, math, teamwork, and real-world problem solving — learned entirely by doing, not reading.</p>
+        <div class="pursuit-note" style="color:#2980B9;background:rgba(41,128,185,.07);">Students pitch, plan, launch and reflect. Entrepreneurial thinking built from the inside out — in the heart of Scottsdale.</div>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:2rem;font-style:italic;color:var(--gray);font-size:.95rem;">Every Pursuit is designed and owned by the student — with teacher guidance, real deliverables, and genuine accountability.</p>
+</section>
+
+<!-- SUPERPOWERS -->
+<section id="superpowers" class="section-dark" style="padding:90px 6%;">
+  <div style="max-width:960px;margin:0 auto;">
+    <span class="section-label" style="color:var(--gold);">What We Track</span>
+    <h2 class="section-title">SuperPowers — The Skills<br>That <em style="color:var(--gold);">Actually Matter</em></h2>
+    <p class="section-sub" style="margin-bottom:0;">At Flourish we call soft skills SuperPowers — because that is exactly what they are. Tracked for every student, every single day using AI-powered analysis.</p>
+    <div class="sp-grid reveal">
+      <div class="sp-card">
+        <div class="sp-header">Strong Self</div>
+        <ul class="sp-list">
+          <li>Organization</li><li>Perseverance</li>
+          <li>Self-Advocacy</li><li>Self-Awareness</li><li>Confidence</li>
+        </ul>
+      </div>
+      <div class="sp-card">
+        <div class="sp-header">World Changer</div>
+        <ul class="sp-list">
+          <li>Leadership</li><li>Strategy</li>
+          <li>Agency</li><li>Work Ethic</li><li>Integrity</li>
+        </ul>
+      </div>
+      <div class="sp-card">
+        <div class="sp-header">Communicator</div>
+        <ul class="sp-list">
+          <li>Persuasion</li><li>Listening</li>
+          <li>Collaboration</li><li>Empathy</li><li>Fairness</li>
+        </ul>
+      </div>
+      <div class="sp-card">
+        <div class="sp-header">Learning Machine</div>
+        <ul class="sp-list">
+          <li>Curiosity</li><li>Creativity</li>
+          <li>Critical Thinking</li><li>Observation</li><li>Logical Reasoning</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sp-stat reveal">
+      24 SuperPowers tracked daily — AI scoring matches teacher ratings within 10%, proving these skills can be measured and taught systematically.
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="compare">
+  <span class="section-label">Side by Side</span>
+  <h2 class="section-title">Flourish vs. Traditional<br>Middle School</h2>
+  <div style="overflow-x:auto;">
+  <table class="compare-table reveal">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Traditional School</th>
+        <th>✦ Flourish</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>School Size</td><td><span class="x">✗</span> 400–600+ students</td><td><span class="chk">✓</span> Starting ~25, growing thoughtfully</td></tr>
+      <tr><td>Class Size</td><td><span class="x">✗</span> 25–35 per class</td><td><span class="chk">✓</span> Max 25 students per teacher</td></tr>
+      <tr><td>Learning Pace</td><td><span class="x">✗</span> Same for everyone</td><td><span class="chk">✓</span> Personalized mastery arc</td></tr>
+      <tr><td>Teacher Role</td><td><span class="x">✗</span> Lectures to whole class</td><td><span class="chk">✓</span> Coaches each child individually</td></tr>
+      <tr><td>Feedback Speed</td><td><span class="x">✗</span> Days or weeks later</td><td><span class="chk">✓</span> Same-day via AI coach</td></tr>
+      <tr><td>Afternoons</td><td><span class="x">✗</span> More of the same content</td><td><span class="chk">✓</span> Pursuits — passion projects</td></tr>
+      <tr><td>Family Role</td><td><span class="x">✗</span> Occasional updates</td><td><span class="chk">✓</span> Actively included partners</td></tr>
+      <tr><td>Measuring Success</td><td><span class="x">✗</span> End-of-year test scores</td><td><span class="chk">✓</span> 24 SuperPowers tracked daily</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- TUITION -->
+<section id="tuition">
+  <span class="section-label">Tuition &amp; Access</span>
+  <h2 class="section-title">Great Education for<br><em>Every Family</em></h2>
+  <div class="tuition-hero reveal">
+    <h3>A family's income should not determine the quality of their child's education.</h3>
+    <p>Flourish Old Town Scottsdale is committed to making exceptional learning accessible to every Scottsdale family.</p>
+  </div>
+  <div class="tuition-grid reveal">
+    <div class="tuition-card">
+      <div class="tuition-header">
+        <div class="tuition-icon">💰</div>
+        <h3>Standard Tuition</h3>
+      </div>
+      <div class="tuition-body">Our tuition directly supports small class sizes, individualized learning, a rich project-based curriculum, and a full-time educator who truly knows your child by name, story, and strengths.</div>
+    </div>
+    <div class="tuition-card">
+      <div class="tuition-header">
+        <div class="tuition-icon">🎓</div>
+        <h3>Arizona ESA Program</h3>
+      </div>
+      <div class="tuition-body">Arizona's Empowerment Scholarship Account may cover most or all of tuition for qualifying families. Amanda personally walks every single family through the application process — start to finish.</div>
+    </div>
+    <div class="tuition-card">
+      <div class="tuition-header">
+        <div class="tuition-icon">🤝</div>
+        <h3>Need-Based Scholarships</h3>
+      </div>
+      <div class="tuition-body">We are committed to making Flourish accessible to every family in our community. Talk to us. We genuinely want to find a path that works for you. No pressure, no jargon — just a real conversation.</div>
+    </div>
+  </div>
+  <p class="tuition-note reveal">Every family's situation is different. Let's have a real conversation — no pressure, no jargon, just honest answers.</p>
+</section>
+
+<!-- FOUNDING -->
+<section id="founding" class="section-dark" style="padding:90px 6%;text-align:center;">
+  <div class="founding-inner">
+    <span class="section-label" style="color:var(--gold);">Be First</span>
+    <h2 class="section-title">Join Our<br>Founding Cohort</h2>
+    <p class="section-sub" style="margin:0 auto 1rem;">Something rare is happening right here in Old Town Scottsdale.</p>
+    <div class="founding-number">~25</div>
+    <div class="founding-label">Founding Students — Arizona's First Flourish Campus</div>
+    <div class="founding-benefits reveal">
+      <div class="benefit-item">
+        <div class="benefit-icon">⭐</div>
+        <p>Be part of building something from the ground up — your child shapes the culture and traditions of this campus from day one.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">❤️</div>
+        <p>The most intimate Flourish experience possible — every adult will truly know your child by name, story, and strengths.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🚀</div>
+        <p>Founding families have a direct voice in how the school grows and evolves to serve Old Town Scottsdale families.</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🎓</div>
+        <p>We grow thoughtfully. If demand grows beyond 25 we expand carefully so quality is never, ever compromised.</p>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a href="#signup" class="btn-primary" style="font-size:1.05rem;padding:1rem 2.5rem;">Reserve Your Child's Spot →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP FORM -->
+<section id="signup">
+  <div class="signup-inner">
+    <span class="section-label">Get Started</span>
+    <h2 class="section-title">Interested in Flourish?<br><em>Let's Connect.</em></h2>
+    <p class="section-sub">Fill out this quick form and Amanda will personally reach out to answer your questions and walk you through everything — including Arizona ESA funding.</p>
+
+    <div class="form-intro reveal">
+      <div class="form-intro-icon">🌱</div>
+      <div>
+        <h3>This is not a commitment</h3>
+        <p>This form simply helps us learn about your family and start a real conversation. No pressure, no sales tactics — just an educator who genuinely cares about your child.</p>
+      </div>
+    </div>
+
+    <form id="interestForm" action="https://formspree.io/f/mvzberog" method="POST" onsubmit="handleSubmit(event)">
+      <!-- SETUP STEP: Replace YOUR_FORM_ID above with your Formspree form ID (see instructions) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Parent / Guardian Name *</label>
+          <input type="text" name="parentName" required placeholder="Your full name"/>
+        </div>
+        <div class="form-group">
+          <label>Best Phone Number</label>
+          <input type="tel" name="phone" placeholder="(480) 555-0000"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" name="email" required placeholder="your@email.com"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Child's Name</label>
+          <input type="text" name="childName" placeholder="First name is fine"/>
+        </div>
+        <div class="form-group">
+          <label>Current Grade</label>
+          <select name="grade">
+            <option value="">Select grade</option>
+            <option>4th (entering 5th)</option>
+            <option>5th Grade</option>
+            <option>6th Grade</option>
+            <option>7th Grade</option>
+            <option>8th Grade</option>
+            <option>Multiple children</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Current School / Area</label>
+        <input type="text" name="currentSchool" placeholder="Current school or neighborhood"/>
+      </div>
+      <div class="form-group">
+        <label>What Matters Most to You?</label>
+        <textarea name="priorities" placeholder="What are you looking for in a middle school experience? What's not working right now? There are no wrong answers — we just want to understand your family."></textarea>
+      </div>
+      <div class="form-group">
+        <label>How Did You Hear About Flourish?</label>
+        <select name="source">
+          <option value="">Select one</option>
+          <option>Nextdoor</option>
+          <option>Instagram / Social Media</option>
+          <option>Friend or Neighbor</option>
+          <option>Flyer or Event</option>
+          <option>Google Search</option>
+          <option>flourishschools.com</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" name="esa" id="esaCheck"/>
+        <label for="esaCheck">I'd like to learn more about Arizona ESA funding</label>
+      </div>
+      <div class="form-check" style="margin-top:.6rem;margin-bottom:1.4rem;">
+        <input type="checkbox" name="visit" id="visitCheck"/>
+        <label for="visitCheck">I'm interested in scheduling a visit or info session</label>
+      </div>
+      <button type="submit" class="submit-btn">Send My Interest Form →</button>
+      <p class="form-privacy">Your information is never shared or sold. Amanda will personally respond within 24 hours.</p>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <div class="check">🌱</div>
+      <h3>Thank you for reaching out!</h3>
+      <p>Amanda will personally reach out to you within 24 hours. We are so excited to tell you more about what we are building in Old Town Scottsdale.<br><br>In the meantime, feel free to email Amanda directly at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d7c707c73797c70786e6c6874697c5d7b7172686f746e756e7e757272716e337e7270">[email&#160;protected]</a></strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Flourish Microschool</h3>
+      <p>A private middle school for grades 5–8 opening in Old Town Scottsdale, AZ for Fall 2026. Where learning is a joy, and every child is known, challenged, and seen.</p>
+      <div class="footer-tagline">"Your child was born asking why. We built Flourish so they never stop."</div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Flourish</a></li>
+        <li><a href="#philosophy">Our Philosophy</a></li>
+        <li><a href="#schedule">Daily Schedule</a></li>
+        <li><a href="#pursuits">Pursuits</a></li>
+        <li><a href="#tuition">Tuition &amp; ESA</a></li>
+        <li><a href="#signup">Reserve a Spot</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="/cdn-cgi/l/email-protection#29484448474d48444c5a585c405d48694f45465c5b405a415a4a414646455a074a4644">Email Amanda</a></li>
+        <li><a href="https://flourishschools.com" target="_blank">flourishschools.com</a></li>
+        <li><a href="#signup">Interest Form</a></li>
+      </ul>
+      <div style="margin-top:1.2rem;color:var(--mint);font-size:.88rem;line-height:1.7;">
+        Old Town Scottsdale, AZ 85251<br>
+        Grades 5–8 · Opening Fall 2026
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Flourish Microschool Old Town Scottsdale · <a href="https://flourishschools.com" style="color:rgba(255,255,255,.4);text-decoration:none;">flourishschools.com</a>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Nav toggle
+  function toggleNav(){
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  // Close nav on link click
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // Back to top
+  const btt = document.getElementById('btt');
+  window.addEventListener('scroll',()=>{
+    btt.classList.toggle('show', window.scrollY > 500);
+  });
+
+  // Form submit — sends to Formspree (emails Amanda on every signup)
+  async function handleSubmit(e){
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if(res.ok){
+        form.style.display='none';
+        const success = document.getElementById('formSuccess');
+        succes
